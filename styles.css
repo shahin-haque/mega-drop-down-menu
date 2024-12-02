@@ -1,0 +1,283 @@
+:root {
+  --primary: #635bff;
+  --background: #fff;
+  --text: #0a2540;
+  --border: #e0e0e0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  color: var(--text);
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style-type: none;
+}
+/* reset end */
+.header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-right: 2rem;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.nav-list {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-link:hover {
+  opacity: 0.7;
+}
+
+.dropdown {
+  position: absolute;
+  top: 130%;
+  left: 0;
+  background: var(--background);
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+  min-width: 400px;
+  padding: 1rem;
+}
+
+.nav-item:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.featured-item {
+  grid-column: 1 / -1;
+  background: linear-gradient(to right, #f6f9fc, #f0f4f8);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.featured-item h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.dropdown-item {
+  padding: 0.75rem;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #f6f9fc;
+}
+
+.dropdown-item h4 {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.dropdown-item p {
+  font-size: 0.875rem;
+  color: #4f566b;
+}
+
+.nav-buttons {
+  margin-left: auto;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.btn-ghost {
+  color: var(--text);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.chevron {
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 2px;
+  transform: rotate(45deg);
+  margin-top: -2px;
+  transition: transform 0.2s ease;
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .nav-list {
+    gap: 1rem;
+  }
+
+  .dropdown {
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--background);
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .nav-list.active {
+    display: flex;
+  }
+
+  .dropdown {
+    position: static;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    min-width: auto;
+    padding: 0;
+    margin-top: 0.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+
+  .dropdown-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-buttons {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-link {
+    justify-content: space-between;
+  }
+
+  .chevron {
+    transform: rotate(45deg);
+  }
+
+  .nav-item.active .chevron {
+    transform: rotate(-135deg);
+  }
+
+  .nav-item.active .dropdown {
+    max-height: 1000px;
+    transition: max-height 0.5s ease-in;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1rem;
+    margin-right: 1rem;
+  }
+
+  .nav {
+    height: 56px;
+  }
+
+  .featured-item,
+  .dropdown-item {
+    padding: 1rem;
+  }
+
+  .featured-item h3 {
+    font-size: 1rem;
+  }
+
+  .dropdown-item h4 {
+    font-size: 0.8rem;
+  }
+
+  .dropdown-item p {
+    font-size: 0.75rem;
+  }
+}
